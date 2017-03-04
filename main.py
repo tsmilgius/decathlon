@@ -7,7 +7,7 @@ class Athlete:
     def __init__(self, result_set):
         self.result_set = result_set
 
-    def print_athlete_result(self):
+    def athlete_result(self):
         result = 0;
         hundred_meters = (25.4347, 18, 1.81)
         long_jump = (0.14354, 220, 1.4)
@@ -16,7 +16,7 @@ class Athlete:
         four_hundred = (1.53775, 82, 1.81)
         hurdles= (5.74352, 28.5, 1.92)
         discus = (12.91, 4, 1.1)
-        pole =  (10.14, 7, 1.08)
+        pole =  (0.2797, 100, 1.35)
         javelin = (10.14, 7, 1.08)
         fifteen_hundred = (0.03768, 480, 1.85)
 
@@ -42,9 +42,13 @@ class Athlete:
             if key == '1500m':
                 result += int(fifteen_hundred[0] * math.pow((fifteen_hundred[1] - float(to_seconds(self.result_set[key])) ), fifteen_hundred[2]))
 
-        print(self.result_set['name'])
         return result
 
-athl = Athlete(read_csv()[2])
 
-print(athl.print_athlete_result())
+def result_list():
+    res_li = []
+    for athl in range(len(read_csv())):
+        res_li.append(Athlete(read_csv()[athl]).athlete_result())
+    return res_li
+
+print(result_list())
