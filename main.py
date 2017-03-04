@@ -1,27 +1,6 @@
 import math
 from helpers import to_seconds
 from readinput import read_csv
-#
-# class Event:
-#     def __init__(self, name, a, b, c, result):
-#         self.name = name
-#         self.a = a
-#         self.b = b
-#         self.c = c
-#         self.result = result
-#
-#     def track_event_score(self):
-#         """ calculates score for track events"""
-#         return int(self.a * math.pow((self.b - self.result), self.c))
-#
-#     def field_event_jump_score(self):
-#         """ calculates score for field jumping events"""
-#         return int(self.a * math.pow((self.result*100 - self.b), self.c))
-#
-#     def field_event_throw_score(self):
-#         """ calculates score for field throwing events"""
-#         return int(self.a * math.pow((self.result - self.b), self.c))
-
 
 class Athlete:
 
@@ -63,29 +42,9 @@ class Athlete:
             if key == '1500m':
                 result += int(fifteen_hundred[0] * math.pow((fifteen_hundred[1] - float(to_seconds(self.result_set[key])) ), fifteen_hundred[2]))
 
+        print(self.result_set['name'])
         return result
 
-
-
-
-athl = Athlete(read_csv()[0])
+athl = Athlete(read_csv()[2])
 
 print(athl.print_athlete_result())
-
-
-# first_event = Event('100 m', 25.4347, 18, 1.81, 10.23)
-# second_event = Event('Long Jump', 0.14354, 220, 1.4, 7.88)
-# third_event = Event('Shot Put', 51.39, 1.5, 1.05, 14.52)
-# fourth_event = Event('High Jump', 0.8465, 75, 1.42, 2.01)
-# fifth_event = Event('400 m', 1.53775, 82, 1.81, 45.00)
-# sixth_event = Event('110 m hurdles', 5.74352, 28.5, 1.92, 13.69)
-# seventh_event = Event('Discus Throw', 12.91, 4, 1.1, 43.34)
-# eight_event = Event('Pole Vault', 0.2797, 100, 1.35, 5.20)
-# ninth_event = Event('Javelin Throw', 10.14, 7, 1.08, 63.63)
-# tenth_event = Event('1500 m', 0.03768, 480, 1.85, float(to_seconds('4.17.52')))
-#
-#
-# # print(first_event.track_event_score() + second_event.field_event_jump_score() + third_event.field_event_throw_score() + fourth_event.field_event_jump_score() + fifth_event.track_event_score() + sixth_event.track_event_score() + seventh_event.field_event_throw_score() + eight_event.field_event_jump_score() + ninth_event.field_event_throw_score() + tenth_event.track_event_score())
-# # print(second_event.field_event_jump_score())
-# print(to_seconds('4.17.52'))
-# print(tenth_event.track_event_score())
