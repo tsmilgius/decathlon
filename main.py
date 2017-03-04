@@ -1,4 +1,5 @@
-import math
+import math, json, io, codecs
+from collections import OrderedDict
 from helpers import to_seconds
 from readinput import read_csv
 
@@ -8,6 +9,7 @@ class Athlete:
         self.result_set = result_set
 
     def athlete_result(self):
+        """calculates athletes result, returns integer"""
         result = 0;
         hundred_meters = (25.4347, 18, 1.81)
         long_jump = (0.14354, 220, 1.4)
@@ -46,9 +48,25 @@ class Athlete:
 
 
 def result_list():
+
+    """makes a list of all results from dataset"""
     res_li = []
     for athl in range(len(read_csv())):
         res_li.append(Athlete(read_csv()[athl]).athlete_result())
+        # print(read_csv()[athl]['name'])
     return res_li
 
-print(result_list())
+def calculated_results():
+    """ adds result key and according value to a dictionary"""
+    listas = read_csv()
+    for athl in range(len(result_list())):
+        listas[athl]['result'] = result_list()[athl]
+    return listas
+
+def output_json():
+    """ outputs json file ordered by ascending order"""
+    return json.dumps(calculated_results())
+
+
+with codecs.open('data.json', 'w', 'utf8') as f:
+     f.write(json.dumps(calculated_results(), sort_keys = True, ensure_ascii=False))
