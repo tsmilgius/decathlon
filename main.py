@@ -9,6 +9,10 @@ class Athlete:
     def __init__(self, result_set):
         self.result_set = result_set
 
+    def calculate_track_result(self):
+        pass
+
+
     def athlete_result(self):
         """calculates athletes result, returns an integer"""
         result = 0
@@ -50,41 +54,37 @@ class Athlete:
                 result += int(
                     fifteen_hundred[0] * math.pow((fifteen_hundred[1] - float(to_seconds(self.result_set[key]))),
                                                   fifteen_hundred[2]))
-
         return result
 
+    def list_results():
+        """returns the list of all results"""
+        res_li = []
+        for athl in range(len(read_input())):
+            res_li.append(Athlete(read_input()[athl]).athlete_result())
 
-def list_results():
-    """returns the list of all results"""
-    res_li = []
-    for athl in range(len(read_input())):
-        res_li.append(Athlete(read_input()[athl]).athlete_result())
+        return res_li
 
-    return res_li
-
-
-def add_score_position():
-    """ adds 'result' key and according value to a dictionary
-    also sorts the list by the result in descending order and
-    assigns the 'position to the athlete"""
-    listas = read_input()
-    for athl in range(len(list_results())):
-        listas[athl]['result'] = list_results()[athl]
-    sortedlist = sorted(listas, key=itemgetter('result'), reverse=True)
-    for ath in range(len(sortedlist)):
-        sortedlist[ath]['position'] = str(ath + 1)
-    for d in range(len(sortedlist) - 1):
-        if sortedlist[d]['result'] == sortedlist[d + 1]['result']:
-            sortedlist[d]['position'] = str(sortedlist[d]['position']) + '-' + str(sortedlist[d + 1]['position'])
-            sortedlist[d + 1]['position'] = str(sortedlist[d]['position'])
-
-    return sortedlist
+    def add_score_position():
+        """ adds 'result' key and according value to a dictionary
+        also sorts the list by the result in descending order and
+        assigns the 'position to the athlete"""
+        listas = read_input()
+        for athl in range(len(Athlete.list_results())):
+            listas[athl]['result'] = Athlete.list_results()[athl]
+        sortedlist = sorted(listas, key=itemgetter('result'), reverse=True)
+        for ath in range(len(sortedlist)):
+            sortedlist[ath]['position'] = str(ath + 1)
+        for d in range(len(sortedlist) - 1):
+            if sortedlist[d]['result'] == sortedlist[d + 1]['result']:
+                sortedlist[d]['position'] = str(sortedlist[d]['position']) + '-' + str(sortedlist[d + 1]['position'])
+                sortedlist[d + 1]['position'] = str(sortedlist[d]['position'])
+        return sortedlist
 
 
 def save_to_file():
     """saves the result to pretty printed *.json file"""
     final_dict = OrderedDict()
-    final_dict['Competition scores'] = add_score_position()
+    final_dict['Competition scores'] = Athlete.add_score_position()
 
     with codecs.open('uploads/data.json', 'w', 'utf8') as f:
         f.write(json.dumps(final_dict, indent=4, sort_keys=True, ensure_ascii=False))

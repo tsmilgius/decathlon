@@ -23,5 +23,3 @@ def read_input():
             return list_of_dictinionaries
         except csv.Error as e:
             return 'Not valid values'
-
-print(read_input())
