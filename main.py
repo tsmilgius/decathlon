@@ -62,9 +62,9 @@ def list_results():
 
 
 def add_score_position():
-    """ adds result key and according value to a dictionary
-    also sorts the list by the result in descending order
-    assigns the 'position to the athlete, in case """
+    """ adds 'result' key and according value to a dictionary
+    also sorts the list by the result in descending order and
+    assigns the 'position to the athlete"""
     listas = read_input()
     for athl in range(len(list_results())):
         listas[athl]['result'] = list_results()[athl]
@@ -86,3 +86,5 @@ def save_to_file():
 
     with codecs.open('data.json', 'w', 'utf8') as f:
         f.write(json.dumps(final_dict, indent=4, sort_keys=True, ensure_ascii=False))
+
+save_to_file()
