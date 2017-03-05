@@ -6,11 +6,10 @@ from readinput import read_input
 
 
 class Athlete:
+
+        
     def __init__(self, result_set):
         self.result_set = result_set
-
-    def calculate_track_result(self):
-        pass
 
 
     def athlete_result(self):
