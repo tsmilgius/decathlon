@@ -23,6 +23,8 @@ class Athlete:
         javelin = (10.14, 7, 1.08)
         fifteen_hundred = (0.03768, 480, 1.85)
 
+        ## TO DO: rewrite this part: create three different cases/methods and call them when needed
+
         for key, value in self.result_set.items():
             if key == '100m':
                 result += int(
@@ -53,7 +55,7 @@ class Athlete:
 
 
 def list_results():
-    """iterates through the input data"""
+    """returns the list of all results"""
     res_li = []
     for athl in range(len(read_input())):
         res_li.append(Athlete(read_input()[athl]).athlete_result())
@@ -84,7 +86,5 @@ def save_to_file():
     final_dict = OrderedDict()
     final_dict['Competition scores'] = add_score_position()
 
-    with codecs.open('data.json', 'w', 'utf8') as f:
+    with codecs.open('uploads/data.json', 'w', 'utf8') as f:
         f.write(json.dumps(final_dict, indent=4, sort_keys=True, ensure_ascii=False))
-
-save_to_file()
